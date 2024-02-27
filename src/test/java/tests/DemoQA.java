@@ -81,21 +81,20 @@ public class DemoQA {
                 Thread.sleep(2000);
                 WebElement editButton = driver.findElement(new By.ByCssSelector("span#edit-record-4"));
                 editButton.click();
-                Thread.sleep(2000);
-                firstName.sendKeys("Edt");
-
-                lastName.sendKeys("Pala");
-
-                eMail.sendKeys("email@test.com");
-
-                age.sendKeys("25");
-
-                salary.sendKeys("15000");
-
-                department.sendKeys("ARGE");
-
-                submitButton.click();
-                break;
+                WebElement editName = driver.findElement(new By.ByCssSelector("input#firstName"));
+                editName.sendKeys(" Edit");
+                WebElement editLastName = driver.findElement(new By.ByCssSelector("input#lastName"));
+                editLastName.sendKeys(" Edit");
+                WebElement eMailEdit = driver.findElement(new By.ByCssSelector("input#userEmail"));
+                eMailEdit.sendKeys("emailEdit@test.com");
+                WebElement ageEdit = driver.findElement(new By.ByCssSelector("input#age"));
+                ageEdit.sendKeys("2");
+                WebElement salaryEdit = driver.findElement(new By.ByCssSelector("input#salary"));
+                salaryEdit.sendKeys("120");
+                WebElement departmentEdit = driver.findElement(new By.ByCssSelector("input#department"));
+                departmentEdit.sendKeys(" Edit");
+                WebElement submitButtonEdit = driver.findElement(new By.ByCssSelector(" button#submit"));
+                submitButtonEdit.click();
 
             }
 
