@@ -41,66 +41,58 @@ public class DemoQA {
 
     @Test
     public void clickButtons() throws InterruptedException {
-        WebElement buttons = driver.findElement(new By.ByCssSelector("li#item-4"));
+        WebElement buttons = driver.findElement(new By.ByXPath("//span[text()=\"Buttons\"]"));
         buttons.click();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0, 500);");
-        WebElement clickmeButton = driver.findElement(new By.ByCssSelector(".col-md-6 div:nth-of-type(3) > .btn"));
+      WebElement clickmeButton = driver.findElement(new By.ByXPath("//button[starts-with(., 'Click Me')]"));
         clickmeButton.click();
-        WebElement messageElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("p#dynamicClickMessage")));
-        String message = messageElement.getText();
-        System.out.println(message);
-        Assert.assertEquals(message, "You have done a dynamic click");
+        WebElement messageElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@id='dynamicClickMessage']")));
+         String message = messageElement.getText();
+          System.out.println(message);
+         Assert.assertEquals(message, "You have done a dynamic click");
         driver.get("https://demoqa.com/webtables");
-        WebElement addButton = driver.findElement(new By.ByCssSelector("button#addNewRecordButton"));
+        WebElement addButton = driver.findElement(new By.ByXPath("//button[@id='addNewRecordButton']"));
         addButton.click();
-        WebElement firstName = driver.findElement(new By.ByCssSelector("input#firstName"));
+        WebElement firstName = driver.findElement(new By.ByXPath("//input[@id='firstName']"));
         firstName.sendKeys("Begüm");
-        WebElement lastName = driver.findElement(new By.ByCssSelector("input#lastName"));
+        WebElement lastName = driver.findElement(new By.ByXPath("//input[@id='lastName']"));
         lastName.sendKeys("Pala");
-        WebElement eMail = driver.findElement(new By.ByCssSelector("input#userEmail"));
+        WebElement eMail = driver.findElement(new By.ByXPath("//input[@id='userEmail']"));
         eMail.sendKeys("email@test.com");
-        WebElement age = driver.findElement(new By.ByCssSelector("input#age"));
+        WebElement age = driver.findElement(new By.ByXPath("//input[@id='age']"));
         age.sendKeys("25");
-        WebElement salary = driver.findElement(new By.ByCssSelector("input#salary"));
+        WebElement salary = driver.findElement(new By.ByXPath("//input[@id='salary']"));
         salary.sendKeys("15000");
-        WebElement department = driver.findElement(new By.ByCssSelector("input#department"));
+        WebElement department = driver.findElement(new By.ByXPath("//input[@id='department']"));
         department.sendKeys("ARGE");
-        WebElement submitButton = driver.findElement(new By.ByCssSelector(" button#submit"));
+        WebElement submitButton = driver.findElement(new By.ByXPath("//button[@id='submit']"));
         submitButton.click();
-        List<WebElement> rows = driver.findElements(new By.ByCssSelector("div.rt-table > div.rt-tbody > div.rt-tr-group"));
-        for (WebElement row : rows) {
-            WebElement nameElement = row.findElement(new By.ByCssSelector("div.rt-td"));
-            String name = nameElement.getAttribute("textContent").trim();
-            System.out.println(name);
-            if (name.equals("Begüm")) {
-                WebElement search = driver.findElement(new By.ByCssSelector("input#searchBox"));
-                search.sendKeys("Begüm");
-                js = (JavascriptExecutor) driver;
-                js.executeScript("window.scrollBy(0, 500);");
-                Thread.sleep(2000);
-                WebElement editButton = driver.findElement(new By.ByCssSelector("span#edit-record-4"));
-                editButton.click();
-                WebElement editName = driver.findElement(new By.ByCssSelector("input#firstName"));
-                editName.sendKeys(" Edit");
-                WebElement editLastName = driver.findElement(new By.ByCssSelector("input#lastName"));
-                editLastName.sendKeys(" Edit");
-                WebElement eMailEdit = driver.findElement(new By.ByCssSelector("input#userEmail"));
-                eMailEdit.sendKeys("emailEdit@test.com");
-                WebElement ageEdit = driver.findElement(new By.ByCssSelector("input#age"));
-                ageEdit.sendKeys("2");
-                WebElement salaryEdit = driver.findElement(new By.ByCssSelector("input#salary"));
-                salaryEdit.sendKeys("120");
-                WebElement departmentEdit = driver.findElement(new By.ByCssSelector("input#department"));
-                departmentEdit.sendKeys(" Edit");
-                WebElement submitButtonEdit = driver.findElement(new By.ByCssSelector(" button#submit"));
-                submitButtonEdit.click();
+        WebElement search = driver.findElement(new By.ByXPath("//input[@id='searchBox']"));
+        search.sendKeys("Begüm");
+        js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0, 500);");
+        Thread.sleep(2000);
+        WebElement editButton = driver.findElement(new By.ByXPath("//span[@title='Edit']"));
+        editButton.click();
+        WebElement editName = driver.findElement(new By.ByXPath("//input[@id='firstName']"));
+        editName.sendKeys(" Edit");
+        WebElement editLastName = driver.findElement(new By.ByXPath("//input[@id='lastName']"));
+        editLastName.sendKeys(" Edit");
+        WebElement eMailEdit = driver.findElement(new By.ByXPath("//input[@id='userEmail']"));
+        eMailEdit.clear();
+        eMailEdit.sendKeys("Edit@hotmail.com");
+        WebElement ageEdit = driver.findElement(new By.ByXPath("//input[@id='age']"));
+        ageEdit.sendKeys("2");
+        WebElement salaryEdit = driver.findElement(new By.ByXPath("//input[@id='salary']"));
+        salaryEdit.sendKeys("120");
+        WebElement departmentEdit = driver.findElement(new By.ByXPath("//input[@id='department']"));
+        departmentEdit.sendKeys(" Edit");
+        WebElement submitButtonEdit = driver.findElement(new By.ByXPath("//button[@id='submit']"));
+        submitButtonEdit.click();
 
-            }
-
-
-        }
     }
+
     @AfterMethod(alwaysRun = true)
     public void after () {
         webDriver.quitDriver();
